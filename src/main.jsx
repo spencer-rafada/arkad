@@ -5,11 +5,16 @@ import 'normalize.css'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import { ThemeProvider, createTheme } from '@mui/material/styles'
 import { ErrorPage } from './pages/index.jsx'
+import Auth0ProviderWithHistory from './providers/Auth0ProviderWithHistory.jsx'
 
 const router = createBrowserRouter([
   {
     path: '/',
-    element: <App />,
+    element: (
+      <Auth0ProviderWithHistory>
+        <App />
+      </Auth0ProviderWithHistory>
+    ),
     errorElement: <ErrorPage />,
   },
 ])
