@@ -17,8 +17,12 @@ import { useTheme } from '@mui/material/styles'
 import { useAuth0 } from '@auth0/auth0-react'
 import LoginButton from '../components/auth/LoginButton'
 import LogoutButton from '../components/auth/LogoutButton'
+import { useNavigate, useLocation } from 'react-router-dom'
 
-const pages = ['Goals', 'Resources']
+const pages = [
+  { name: 'Overview', route: 'home' },
+  { name: 'My Goals', route: 'my-goals' },
+]
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout']
 
 function Navbar() {
@@ -26,8 +30,8 @@ function Navbar() {
   const [anchorElUser, setAnchorElUser] = React.useState(null)
   const { isAuthenticated } = useAuth0()
   const theme = useTheme()
-
-  console.log(isAuthenticated)
+  const navigate = useNavigate()
+  const location = useLocation()
 
   // Style
   const navbarStyle = css`
@@ -41,8 +45,13 @@ function Navbar() {
     setAnchorElUser(event.currentTarget)
   }
 
-  const handleCloseNavMenu = () => {
+  const handleCloseNavMenu = (route) => {
     setAnchorElNav(null)
+    if (route) {
+      navigate(`/${route}`)
+    } else {
+      navigate(location.pathname)
+    }
   }
 
   const handleCloseUserMenu = () => {
@@ -96,14 +105,17 @@ function Navbar() {
                 horizontal: 'left',
               }}
               open={Boolean(anchorElNav)}
-              onClose={handleCloseNavMenu}
+              onClose={() => handleCloseNavMenu()}
               sx={{
                 display: { xs: 'block', md: 'none' },
               }}
             >
               {pages.map((page) => (
-                <MenuItem key={page} onClick={handleCloseNavMenu}>
-                  <Typography textAlign='center'>{page}</Typography>
+                <MenuItem
+                  key={page.name}
+                  onClick={() => handleCloseNavMenu(page.route)}
+                >
+                  <Typography textAlign='center'>{page.name}</Typography>
                 </MenuItem>
               ))}
             </Menu>
@@ -125,16 +137,16 @@ function Navbar() {
               textDecoration: 'none',
             }}
           >
-            LOGO
+            ARKAD
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
             {pages.map((page) => (
               <Button
-                key={page}
-                onClick={handleCloseNavMenu}
+                key={page.name}
+                onClick={() => handleCloseNavMenu(page.route)}
                 sx={{ my: 2, color: 'white', display: 'block' }}
               >
-                {page}
+                {page.name}
               </Button>
             ))}
           </Box>
