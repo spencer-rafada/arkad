@@ -1,5 +1,5 @@
 yaml
-name: CI/CD
+name: CI
 on:
   push:
     branches:
