@@ -25,7 +25,13 @@ function Navbar() {
 
   // Style
   const navbarStyle = css`
-    background-color: ${theme.palette.main};
+    background-color: ${theme.palette.primary.third};
+    color: ${theme.palette.primary.main};
+    box-shadow: 0 0 0 0;
+  `
+
+  const navbarLinkStyle = css`
+    color: ${theme.palette.primary.main};
   `
 
   const handleOpenNavMenu = (event) => {
@@ -62,7 +68,7 @@ function Navbar() {
               color: 'inherit',
               textDecoration: 'none',
             }}
-            data-testid='mobile-title'
+            data-testid='desktop-title'
           >
             ARKAD
           </Typography>
@@ -98,7 +104,9 @@ function Navbar() {
             >
               {pages.map((page) => (
                 <MenuItem key={page} onClick={handleCloseNavMenu}>
-                  <Typography textAlign='center'>{page}</Typography>
+                  <Typography textAlign='center' sx={navbarLinkStyle}>
+                    {page}
+                  </Typography>
                 </MenuItem>
               ))}
             </Menu>
@@ -119,16 +127,20 @@ function Navbar() {
               color: 'inherit',
               textDecoration: 'none',
             }}
-            data-testid='desktop-title'
+            data-testid='mobile-title'
           >
-            LOGO
+            ARKAD
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
             {pages.map((page) => (
               <Button
                 key={page}
                 onClick={handleCloseNavMenu}
-                sx={{ my: 2, color: 'white', display: 'block' }}
+                sx={{
+                  my: 2,
+                  color: `${theme.palette.primary.main}`,
+                  display: 'block',
+                }}
               >
                 {page}
               </Button>
