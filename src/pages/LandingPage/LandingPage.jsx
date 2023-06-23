@@ -14,7 +14,7 @@ export default function LandingPage() {
   `
   return (
     <Container maxWidth='xl' sx={containerStyle}>
-      <Box sx={{ backgroundColor: 'red' }}>y</Box>
+      X
     </Container>
   )
 }
