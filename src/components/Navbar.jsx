@@ -11,17 +11,18 @@ import Avatar from '@mui/material/Avatar'
 import Button from '@mui/material/Button'
 import Tooltip from '@mui/material/Tooltip'
 import MenuItem from '@mui/material/MenuItem'
-import AdbIcon from '@mui/icons-material/Adb'
+import SavingsIcon from '@mui/icons-material/Savings'
 import LogoutButton from '../components/auth/LogoutButton'
 import LoginButton from '../components/auth/LoginButton'
 import { css } from '@emotion/react'
 import { useTheme } from '@mui/material/styles'
 import { Link } from 'react-router-dom'
 import { useAuth0 } from '@auth0/auth0-react'
+import { Divider } from '@mui/material'
 
 const pages = [
-  { page: 'Goals', route: 'my-goals' },
-  { page: 'Resources', route: 'resources' },
+  { page: 'Features', route: 'features' },
+  // { page: 'Features', route: 'features' },
 ]
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout']
 
@@ -61,7 +62,7 @@ function Navbar() {
     <AppBar position='static' sx={navbarStyle}>
       <Container maxWidth='xl'>
         <Toolbar disableGutters>
-          <AdbIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} />
+          <SavingsIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} />
           <Typography
             variant='h6'
             noWrap
@@ -123,7 +124,7 @@ function Navbar() {
               ))}
             </Menu>
           </Box>
-          <AdbIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} />
+          <SavingsIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} />
           <Typography
             variant='h5'
             noWrap
@@ -142,7 +143,14 @@ function Navbar() {
           >
             ARKAD
           </Typography>
-          <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
+          {/* Desktop */}
+          <Box
+            sx={{
+              flexGrow: 1,
+              display: { xs: 'none', md: 'flex' },
+              justifyContent: 'end',
+            }}
+          >
             {pages.map((page, index) => (
               <Button
                 key={index}
@@ -160,43 +168,56 @@ function Navbar() {
             ))}
           </Box>
 
-          {/* Authentication and Login */}
-          {isAuthenticated ? (
-            <Box sx={{ flexGrow: 0 }}>
-              <Tooltip title='Open settings'>
-                <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                  <Avatar alt='Remy Sharp' src='/static/images/avatar/2.jpg' />
-                </IconButton>
-              </Tooltip>
-              <Menu
-                sx={{ mt: '45px' }}
-                id='menu-appbar'
-                anchorEl={anchorElUser}
-                anchorOrigin={{
-                  vertical: 'top',
-                  horizontal: 'right',
-                }}
-                keepMounted
-                transformOrigin={{
-                  vertical: 'top',
-                  horizontal: 'right',
-                }}
-                open={Boolean(anchorElUser)}
-                onClose={handleCloseUserMenu}
-              >
-                {settings.map((setting) => (
-                  <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                    <Typography textAlign='center'>{setting}</Typography>
+          <Box sx={{ display: 'flex', alignItems: 'center' }}>
+            <Divider
+              orientation='vertical'
+              sx={{
+                bgcolor: `${theme.palette.primary.text}`,
+                height: 32,
+                mx: 2,
+              }}
+            />
+            {/* Authentication and Login */}
+            {isAuthenticated ? (
+              <>
+                <Tooltip title='Open settings'>
+                  <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
+                    <Avatar
+                      alt='Remy Sharp'
+                      src='/static/images/avatar/2.jpg'
+                    />
+                  </IconButton>
+                </Tooltip>
+                <Menu
+                  sx={{ mt: '45px' }}
+                  id='menu-appbar'
+                  anchorEl={anchorElUser}
+                  anchorOrigin={{
+                    vertical: 'top',
+                    horizontal: 'right',
+                  }}
+                  keepMounted
+                  transformOrigin={{
+                    vertical: 'top',
+                    horizontal: 'right',
+                  }}
+                  open={Boolean(anchorElUser)}
+                  onClose={handleCloseUserMenu}
+                >
+                  {settings.map((setting) => (
+                    <MenuItem key={setting} onClick={handleCloseUserMenu}>
+                      <Typography textAlign='center'>{setting}</Typography>
+                    </MenuItem>
+                  ))}
+                  <MenuItem>
+                    <LogoutButton />
                   </MenuItem>
-                ))}
-                <MenuItem>
-                  <LogoutButton />
-                </MenuItem>
-              </Menu>
-            </Box>
-          ) : (
-            <LoginButton>Log in</LoginButton>
-          )}
+                </Menu>
+              </>
+            ) : (
+              <LoginButton>Log in</LoginButton>
+            )}
+          </Box>
         </Toolbar>
       </Container>
     </AppBar>
