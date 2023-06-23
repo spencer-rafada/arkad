@@ -25,13 +25,13 @@ function Navbar() {
 
   // Style
   const navbarStyle = css`
-    background-color: ${theme.palette.primary.third};
-    color: ${theme.palette.primary.main};
+    background-color: ${theme.palette.primary.background};
+    color: ${theme.palette.primary.text};
     box-shadow: 0 0 0 0;
   `
 
   const navbarLinkStyle = css`
-    color: ${theme.palette.primary.main};
+    color: ${theme.palette.primary.text};
   `
 
   const handleOpenNavMenu = (event) => {
@@ -62,7 +62,6 @@ function Navbar() {
             sx={{
               mr: 2,
               display: { xs: 'none', md: 'flex' },
-              fontFamily: 'monospace',
               fontWeight: 700,
               letterSpacing: '.3rem',
               color: 'inherit',
@@ -121,7 +120,6 @@ function Navbar() {
               mr: 2,
               display: { xs: 'flex', md: 'none' },
               flexGrow: 1,
-              fontFamily: 'monospace',
               fontWeight: 700,
               letterSpacing: '.3rem',
               color: 'inherit',
@@ -138,7 +136,7 @@ function Navbar() {
                 onClick={handleCloseNavMenu}
                 sx={{
                   my: 2,
-                  color: `${theme.palette.primary.main}`,
+                  color: `${theme.palette.primary.text}`,
                   display: 'block',
                 }}
               >
