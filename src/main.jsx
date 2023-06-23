@@ -50,9 +50,20 @@ const router = createBrowserRouter([
 const appTheme = createTheme({
   palette: {
     primary: {
-      main: '#80BCA3',
-      secondary: '#F88F79',
-      third: '#FFF',
+      text: '#0c2d06',
+      main: '#ecfce8',
+      primaryBtn: '#45e87b',
+      secondaryBtn: '#fff',
+      accent: '#16b197',
+    },
+  },
+  typography: {
+    fontFamily: 'Zen Maru Gothic, sans-serif',
+  },
+  overrides: {
+    '@global': {
+      '@import':
+        "url('https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@300;400;500;700;900&display=swap')",
     },
   },
 })
