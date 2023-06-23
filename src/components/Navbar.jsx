@@ -14,8 +14,12 @@ import MenuItem from '@mui/material/MenuItem'
 import AdbIcon from '@mui/icons-material/Adb'
 import { css } from '@emotion/react'
 import { useTheme } from '@mui/material/styles'
+import { Link } from 'react-router-dom'
 
-const pages = ['Goals', 'Resources']
+const pages = [
+  { page: 'Goals', route: 'my-goals' },
+  { page: 'Resources', route: 'resources' },
+]
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout']
 
 function Navbar() {
@@ -101,10 +105,15 @@ function Navbar() {
                 display: { xs: 'block', md: 'none' },
               }}
             >
-              {pages.map((page) => (
-                <MenuItem key={page} onClick={handleCloseNavMenu}>
-                  <Typography textAlign='center' sx={navbarLinkStyle}>
-                    {page}
+              {pages.map((page, index) => (
+                <MenuItem key={index} onClick={handleCloseNavMenu}>
+                  <Typography
+                    textAlign='center'
+                    component={Link}
+                    to={`/${page.route.toLowerCase()}`}
+                    sx={navbarLinkStyle}
+                  >
+                    {page.page}
                   </Typography>
                 </MenuItem>
               ))}
@@ -130,9 +139,11 @@ function Navbar() {
             ARKAD
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
-            {pages.map((page) => (
+            {pages.map((page, index) => (
               <Button
-                key={page}
+                key={index}
+                component={Link}
+                to={`/${page.route.toLowerCase()}`}
                 onClick={handleCloseNavMenu}
                 sx={{
                   my: 2,
@@ -140,7 +151,7 @@ function Navbar() {
                   display: 'block',
                 }}
               >
-                {page}
+                {page.page}
               </Button>
             ))}
           </Box>
