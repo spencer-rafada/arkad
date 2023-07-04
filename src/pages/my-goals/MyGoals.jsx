@@ -1,6 +1,8 @@
 import { Container } from '@mui/material'
 import { css } from '@emotion/react'
 import { useTheme } from '@mui/material/styles'
+import GoalsForm from './dialogs/GoalsDialogPicker'
+import { GoalsCheckoutProvider } from '../../providers/GoalsCheckoutProvider'
 
 export default function MyGoals() {
   const theme = useTheme()
@@ -14,8 +16,10 @@ export default function MyGoals() {
   `
 
   return (
-    <Container maxWidth='xl' sx={containerStyle}>
-      X
-    </Container>
+    <GoalsCheckoutProvider>
+      <Container maxWidth='xl' sx={containerStyle}>
+        <GoalsForm />
+      </Container>
+    </GoalsCheckoutProvider>
   )
 }
