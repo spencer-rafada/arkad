@@ -14,7 +14,7 @@ export default function Separated() {
   } = useContext(GoalsCheckoutContext)
 
   return (
-    <>
+    <div data-testid='separated'>
       <RadioGroup
         value={dialog === 'separateMoney' ? isSeparate : hasSavingsAccount}
         onChange={(e) =>
@@ -28,6 +28,7 @@ export default function Separated() {
           sx={{ color: `${theme.palette.primary.text}` }}
           control={
             <Radio
+              data-testid='yes'
               sx={{
                 '&.Mui-checked': {
                   color: `${theme.palette.primary.primaryBtn}`,
@@ -42,6 +43,7 @@ export default function Separated() {
           sx={{ color: `${theme.palette.primary.text}` }}
           control={
             <Radio
+              data-testid='no'
               sx={{
                 '&.Mui-checked': {
                   color: `${theme.palette.primary.primaryBtn}`,
@@ -52,6 +54,6 @@ export default function Separated() {
           label='No'
         ></FormControlLabel>
       </RadioGroup>
-    </>
+    </div>
   )
 }
