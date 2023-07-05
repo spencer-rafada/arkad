@@ -5,6 +5,7 @@ import { Stack, Button } from '@mui/material'
 import { css } from '@emotion/react'
 import { useTheme } from '@mui/material/styles'
 import { questions } from './questions'
+import { usePostData } from '../../../hooks/usePostData'
 
 export default function GoalsDialogPicker() {
   const {
@@ -23,6 +24,7 @@ export default function GoalsDialogPicker() {
     hasSavingsAccount,
   } = useContext(GoalsCheckoutContext)
   const theme = useTheme()
+  const { postData, isLoading, error } = usePostData()
 
   useEffect(() => {
     if (progress === 0) setDialog('monthlyRevenue')
@@ -61,7 +63,8 @@ export default function GoalsDialogPicker() {
       goalDueDate: goalDueDate.$d,
       hasSavingsAccount,
     }
-    console.log(payload)
+    // TODO: add backend url for this
+    postData('url', payload)
   }
 
   return (
