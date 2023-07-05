@@ -14,14 +14,14 @@ const GoalsCheckoutContext = createContext(null)
 // hasSavings : bool
 
 function GoalsCheckoutProvider({ children }) {
-  const [monthlyRevenue, setMonthlyRevenue] = useState()
+  const [monthlyRevenue, setMonthlyRevenue] = useState(5000)
   const [isSeparate, setIsSeparate] = useState(false)
   const [wantMaterial, setWantMaterial] = useState(false)
   const [materialGoal, setMaterialGoal] = useState()
   const [goalTitle, setGoalTitle] = useState()
   const [goalDescription, setGoalDescription] = useState()
   const [goalCreateDate, setGoalCreateDate] = useState(new Date())
-  const [goalDueDate, setGoalDueDate] = useState()
+  const [goalDueDate, setGoalDueDate] = useState(new Date())
   const [hasSavingsAccount, setHasSavingsAccount] = useState(false)
   const [progress, setProgress] = useState(0)
   const [dialog, setDialog] = useState('monthlyRevenue')

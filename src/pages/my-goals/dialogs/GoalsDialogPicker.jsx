@@ -4,26 +4,33 @@ import { useContext, useEffect } from 'react'
 import { Stack, Button } from '@mui/material'
 import { css } from '@emotion/react'
 import { useTheme } from '@mui/material/styles'
+import { questions } from './questions'
 
 export default function GoalsDialogPicker() {
-  const { dialog, setDialog, setProgress, progress } =
-    useContext(GoalsCheckoutContext)
+  const {
+    setDialog,
+    setProgress,
+    progress,
+    dialog,
+    monthlyRevenue,
+    isSeparate,
+    wantMaterial,
+    materialGoal,
+    goalTitle,
+    goalDescription,
+    goalCreateDate,
+    goalDueDate,
+    hasSavingsAccount,
+  } = useContext(GoalsCheckoutContext)
   const theme = useTheme()
-
-  useEffect(() => {
-    if (dialog === 'monthlyRevenue') setDialog('monthlyRevenue')
-    if (dialog === 'separateMoney') setDialog('separateMoney')
-    if (dialog === 'hasSavings') setDialog('hasSavings')
-    if (dialog === 'wantMaterial') setDialog('wantMaterial')
-    if (dialog === 'modifyGoal') setDialog('modifyGoal')
-  }, [dialog, setDialog])
 
   useEffect(() => {
     if (progress === 0) setDialog('monthlyRevenue')
     if (progress === 1) setDialog('separateMoney')
     if (progress === 2) setDialog('hasSavings')
     if (progress === 3) setDialog('wantMaterial')
-    if (progress === 4) setDialog('modifyGoal')
+    if (progress === 4) setDialog('goalDueDate')
+    if (progress === 5) setDialog('modifyGoal')
   }, [progress, setDialog])
 
   // Styles
@@ -42,10 +49,29 @@ export default function GoalsDialogPicker() {
     }
   `
 
+  const handleSubmit = () => {
+    const payload = {
+      monthlyRevenue,
+      isSeparate,
+      wantMaterial,
+      materialGoal,
+      goalTitle,
+      goalDescription,
+      goalCreateDate,
+      goalDueDate: goalDueDate.$d,
+      hasSavingsAccount,
+    }
+    console.log(payload)
+  }
+
   return (
     <div>
       <GoalsDialog />
-      <Stack direction='row' spacing={2}>
+      <Stack
+        direction='row'
+        spacing={2}
+        sx={{ display: 'flex', justifyContent: 'center' }}
+      >
         <Button
           sx={secondaryButtonStyle}
           disabled={progress === 0}
@@ -55,16 +81,22 @@ export default function GoalsDialogPicker() {
         >
           Back
         </Button>
-        <Button
-          sx={primaryButtonStyle}
-          disabled={progress === 5}
-          onClick={() => {
-            // need to make the 5 dynamic
-            setProgress(progress !== 4 ? progress + 1 : 5)
-          }}
-        >
-          Next
-        </Button>
+        {dialog !== 'modifyGoal' && (
+          <Button
+            sx={primaryButtonStyle}
+            disabled={progress === 5}
+            onClick={() => {
+              setProgress(progress !== 5 ? progress + 1 : questions.length - 1)
+            }}
+          >
+            Next
+          </Button>
+        )}
+        {dialog === 'modifyGoal' && (
+          <Button sx={primaryButtonStyle} onClick={handleSubmit}>
+            Submit
+          </Button>
+        )}
       </Stack>
     </div>
   )
