@@ -1,6 +1,8 @@
 import { Container } from '@mui/material'
 import { css } from '@emotion/react'
 import { useTheme } from '@mui/material/styles'
+import GoalsDialogPicker from './dialogs/GoalsDialogPicker'
+import { GoalsCheckoutProvider } from '../../providers/GoalsCheckoutProvider'
 
 export default function MyGoals() {
   const theme = useTheme()
@@ -14,8 +16,11 @@ export default function MyGoals() {
   `
 
   return (
-    <Container maxWidth='xl' sx={containerStyle}>
-      X
-    </Container>
+    <GoalsCheckoutProvider>
+      <Container maxWidth='xl' sx={containerStyle}>
+        <GoalsDialogPicker />
+      </Container>
+    </GoalsCheckoutProvider>
+    // Put a conditional for goal list here
   )
 }
