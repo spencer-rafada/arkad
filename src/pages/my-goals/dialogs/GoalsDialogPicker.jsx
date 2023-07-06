@@ -6,6 +6,9 @@ import { css } from '@emotion/react'
 import { useTheme } from '@mui/material/styles'
 import { questions } from './questions'
 import { usePostData } from '../../../hooks/usePostData'
+import { useNavigate } from 'react-router-dom'
+import { useAuth0 } from '@auth0/auth0-react'
+import useLocalStorage from '../../../hooks/useLocalStorage'
 
 export default function GoalsDialogPicker() {
   const {
@@ -25,6 +28,9 @@ export default function GoalsDialogPicker() {
   } = useContext(GoalsCheckoutContext)
   const theme = useTheme()
   const { postData, isLoading, error } = usePostData()
+  const navigate = useNavigate()
+  const { isAuthenticated } = useAuth0()
+  const [goal, setGoal] = useLocalStorage('goal', '')
 
   useEffect(() => {
     if (progress === 0) setDialog('monthlyRevenue')
@@ -63,8 +69,13 @@ export default function GoalsDialogPicker() {
       goalDueDate: goalDueDate.$d,
       hasSavingsAccount,
     }
-    // TODO: add backend url for this
-    postData('url', payload)
+    if (isAuthenticated) {
+      postData('http://localhost:3000/goals', payload)
+    } else {
+      const newGoal = [...goal, payload]
+      console.log(newGoal)
+      setGoal(newGoal)
+    }
   }
 
   return (
@@ -77,9 +88,10 @@ export default function GoalsDialogPicker() {
       >
         <Button
           sx={secondaryButtonStyle}
-          disabled={progress === 0}
           onClick={() => {
-            setProgress(progress !== 0 ? progress - 1 : 0)
+            progress === 0
+              ? navigate('/my-goals')
+              : setProgress(progress !== 0 ? progress - 1 : 0)
           }}
         >
           Back
@@ -96,7 +108,12 @@ export default function GoalsDialogPicker() {
           </Button>
         )}
         {dialog === 'modifyGoal' && (
-          <Button sx={primaryButtonStyle} onClick={handleSubmit}>
+          <Button
+            sx={primaryButtonStyle}
+            onClick={handleSubmit}
+            disabled={isLoading}
+            type='submit'
+          >
             Submit
           </Button>
         )}

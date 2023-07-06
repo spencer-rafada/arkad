@@ -8,6 +8,7 @@ import {
   LinearProgress,
   linearProgressClasses,
   TextField,
+  FormControl,
 } from '@mui/material'
 import { useTheme } from '@emotion/react'
 import { questions } from './questions'
@@ -66,7 +67,7 @@ export default function GoalsDialog() {
                 letterSpacing: '0.2rem',
               }}
             >
-              {progress + 1} of {questions.length} : {dialog}
+              {progress + 1} of {questions.length}
             </Typography>
           </Stack>
         </Box>
@@ -132,11 +133,13 @@ export default function GoalsDialog() {
                 label='Goal Name'
                 sx={{ backgroundColor: 'white' }}
                 onChange={(e) => setGoalTitle(e.target.value)}
+                required
               />
               <TextField
                 label='Goal Description'
                 sx={{ backgroundColor: 'white' }}
                 onChange={(e) => setGoalDescription(e.target.value)}
+                required
               />
             </Stack>
           )}

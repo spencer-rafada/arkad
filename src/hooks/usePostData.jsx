@@ -9,6 +9,7 @@ export const usePostData = () => {
   const postData = async (url, data) => {
     setIsLoading(true)
 
+    console.log(url)
     try {
       const response = await axios.post(url, data)
       if (response) {
