@@ -73,9 +73,9 @@ export default function GoalsDialogPicker() {
       postData('http://localhost:3000/goals', payload)
     } else {
       const newGoal = [...goal, payload]
-      console.log(newGoal)
       setGoal(newGoal)
     }
+    // navigate('..')
   }
 
   return (

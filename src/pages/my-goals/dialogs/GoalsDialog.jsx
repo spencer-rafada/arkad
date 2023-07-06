@@ -139,6 +139,8 @@ export default function GoalsDialog() {
                 sx={{ backgroundColor: 'white' }}
                 onChange={(e) => setGoalDescription(e.target.value)}
                 required
+                multiline
+                rows={4}
               />
             </Stack>
           )}
