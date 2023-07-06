@@ -21,7 +21,7 @@ export default function GoalList() {
   const theme = useTheme()
   const { data, isLoading, error } = useFetchData('http://localhost:3000/goals')
   const navigate = useNavigate()
-  const [goal, setGoal] = useLocalStorage('goal')
+  const [goal, setGoal] = useLocalStorage('goal', '')
   const { isAuthenticated } = useAuth0()
   const [list, setList] = useState()
 
@@ -29,7 +29,7 @@ export default function GoalList() {
     if (isAuthenticated) {
       setList(data)
     } else {
-      setList(goal)
+      setList(goal ? goal : [])
     }
   }, [data, goal, isAuthenticated])
 
@@ -42,16 +42,19 @@ export default function GoalList() {
           justifyContent: 'space-between',
         }}
       >
-        <Typography
-          variant='h4'
-          sx={{
-            color: `${theme.palette.primary.text}`,
-            fontWeight: 'bold',
-            fontSize: { xs: '1.5rem', sm: '2rem' },
-          }}
-        >
-          My Goals
-        </Typography>
+        <Stack>
+          <Typography
+            variant='h4'
+            sx={{
+              color: `${theme.palette.primary.text}`,
+              fontWeight: 'bold',
+              fontSize: { xs: '1.5rem', sm: '2rem' },
+            }}
+          >
+            My Goals
+          </Typography>
+        </Stack>
+
         <Button
           sx={{
             backgroundColor: `${theme.palette.primary.primaryBtn}`,
@@ -66,6 +69,19 @@ export default function GoalList() {
           Add Goals
         </Button>
       </Stack>
+      {!isAuthenticated && (
+        <Typography
+          variant='p'
+          sx={{
+            fontStyle: 'italic',
+            fontWeight: 'bold',
+            color: `${theme.palette.primary.text}`,
+          }}
+        >
+          All goals are from public data. Log in to monitor and save your
+          financial goal progress.
+        </Typography>
+      )}
       {error && (
         <Typography variant='h5' sx={{ color: 'red', fontWeight: 'bold' }}>
           Failed to fetch goals. Try again later.

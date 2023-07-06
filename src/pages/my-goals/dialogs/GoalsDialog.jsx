@@ -8,7 +8,6 @@ import {
   LinearProgress,
   linearProgressClasses,
   TextField,
-  FormControl,
 } from '@mui/material'
 import { useTheme } from '@emotion/react'
 import { questions } from './questions'
