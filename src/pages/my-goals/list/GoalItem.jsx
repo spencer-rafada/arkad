@@ -1,10 +1,10 @@
-import { Button, Card, ListItem, ListItemText, Stack } from '@mui/material'
+import { List, ListItemButton, ListItemText } from '@mui/material'
 import CircleOutlinedIcon from '@mui/icons-material/CircleOutlined'
 import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline'
 import { useState } from 'react'
 import useLocalStorage from '../../../hooks/useLocalStorage'
 
-export default function GoalItem({ item, index }) {
+export default function GoalItem({ item, index, isAuthenticated }) {
   const [complete, setComplete] = useState(item.complete)
   const [goals, setGoals] = useLocalStorage('goal')
 
@@ -18,26 +18,21 @@ export default function GoalItem({ item, index }) {
   }
 
   return (
-    <Card key={item._id} sx={{ marginBottom: '0.5rem' }}>
-      <ListItem>
-        <Stack
-          direction='row'
-          sx={{
-            display: 'flex',
-            justifyContent: 'space-between',
-            alignItems: 'center',
-            width: '100%',
-          }}
-        >
-          <ListItemText
-            primary={item.goalTitle}
-            secondary={item.goalDescription}
-          />
-          <Button color='success' onClick={handleCheckComplete}>
+    <List sx={{ marginBottom: '0.5rem' }}>
+      <ListItemButton onClick={handleCheckComplete}>
+        <ListItemText
+          primary={item.goalTitle}
+          secondary={`${item.goalDescription} ${
+            item.goalDueDate ? `- ${item.goalDueDate}` : ``
+          }`}
+          sx={{ width: '100%' }}
+        />
+        {!isAuthenticated && (
+          <ListItemText color='success'>
             {complete ? <CheckCircleOutlineIcon /> : <CircleOutlinedIcon />}
-          </Button>
-        </Stack>
-      </ListItem>
-    </Card>
+          </ListItemText>
+        )}
+      </ListItemButton>
+    </List>
   )
 }

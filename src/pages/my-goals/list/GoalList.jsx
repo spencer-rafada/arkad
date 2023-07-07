@@ -82,7 +82,14 @@ export default function GoalList() {
         <Box>
           <List>
             {list.map((item, index) => {
-              return <GoalItem key={index} item={item} index={index} />
+              return (
+                <GoalItem
+                  key={index}
+                  item={item}
+                  index={index}
+                  isAuthenticated={isAuthenticated}
+                />
+              )
             })}
           </List>
         </Box>
