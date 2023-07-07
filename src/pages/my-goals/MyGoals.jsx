@@ -2,6 +2,7 @@ import { Container } from '@mui/material'
 import { css } from '@emotion/react'
 import { useTheme } from '@mui/material/styles'
 import { Outlet } from 'react-router-dom'
+import { GoalsCheckoutProvider } from '../../providers/GoalsCheckoutProvider'
 
 export default function MyGoals() {
   const theme = useTheme()
@@ -16,9 +17,11 @@ export default function MyGoals() {
 
   return (
     <>
-      <Container maxWidth='xl' sx={containerStyle}>
-        <Outlet />
-      </Container>
+      <GoalsCheckoutProvider>
+        <Container maxWidth='xl' sx={containerStyle}>
+          <Outlet />
+        </Container>
+      </GoalsCheckoutProvider>
     </>
     // Put a conditional for goal list here
   )

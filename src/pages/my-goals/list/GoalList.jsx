@@ -1,14 +1,5 @@
 import { useFetchData } from '../../../hooks/useFetchData'
-import {
-  Box,
-  Button,
-  Card,
-  List,
-  ListItem,
-  ListItemText,
-  Stack,
-  Typography,
-} from '@mui/material'
+import { Box, Button, List, Typography, Stack } from '@mui/material'
 import GoalItemSkeleton from './GoalItemSkeleton'
 import { useTheme } from '@emotion/react'
 import AddIcon from '@mui/icons-material/Add'
@@ -16,6 +7,7 @@ import { useNavigate } from 'react-router-dom'
 import useLocalStorage from '../../../hooks/useLocalStorage'
 import { useAuth0 } from '@auth0/auth0-react'
 import { useEffect, useState } from 'react'
+import GoalItem from './GoalItem'
 
 export default function GoalList() {
   const theme = useTheme()
@@ -89,17 +81,8 @@ export default function GoalList() {
       {data && !isLoading && !error ? (
         <Box>
           <List>
-            {list.map((item) => {
-              return (
-                <Card key={item._id} sx={{ marginBottom: '0.5rem' }}>
-                  <ListItem>
-                    <ListItemText
-                      primary={item.goalTitle}
-                      secondary={item.goalDescription}
-                    />
-                  </ListItem>
-                </Card>
-              )
+            {list.map((item, index) => {
+              return <GoalItem key={index} item={item} index={index} />
             })}
           </List>
         </Box>
