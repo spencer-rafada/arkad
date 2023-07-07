@@ -66,7 +66,7 @@ export default function GoalsDialog() {
                 letterSpacing: '0.2rem',
               }}
             >
-              {progress + 1} of {questions.length}
+              {progress !== 6 ? progress + 1 : 6} of {questions.length}
             </Typography>
           </Stack>
         </Box>
@@ -105,7 +105,9 @@ export default function GoalsDialog() {
             color: `${theme.palette.primary.text}`,
           }}
         >
-          {questions[progress].question}
+          {progress !== 6
+            ? questions[progress].question
+            : 'Successfully added goal! 🎉'}
         </Typography>
         <Box
           sx={{

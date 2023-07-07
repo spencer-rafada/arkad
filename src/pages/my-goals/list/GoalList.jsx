@@ -78,11 +78,10 @@ export default function GoalList() {
             color: `${theme.palette.primary.text}`,
           }}
         >
-          All goals are from public data. Log in to monitor and save your
-          financial goal progress.
+          Log in to monitor and save your financial goal progress.
         </Typography>
       )}
-      {error && (
+      {error && !data && isAuthenticated && (
         <Typography variant='h5' sx={{ color: 'red', fontWeight: 'bold' }}>
           Failed to fetch goals. Try again later.
         </Typography>

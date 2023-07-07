@@ -27,7 +27,7 @@ export default function GoalsDialogPicker() {
     hasSavingsAccount,
   } = useContext(GoalsCheckoutContext)
   const theme = useTheme()
-  const { postData, isLoading, error } = usePostData()
+  const { postData, isLoading } = usePostData()
   const navigate = useNavigate()
   const { isAuthenticated } = useAuth0()
   const [goal, setGoal] = useLocalStorage('goal', '')
@@ -39,6 +39,7 @@ export default function GoalsDialogPicker() {
     if (progress === 3) setDialog('wantMaterial')
     if (progress === 4) setDialog('goalDueDate')
     if (progress === 5) setDialog('modifyGoal')
+    if (progress === 6) setDialog('success')
   }, [progress, setDialog])
 
   // Styles
@@ -70,10 +71,13 @@ export default function GoalsDialogPicker() {
       hasSavingsAccount,
     }
     if (isAuthenticated) {
-      postData('http://localhost:3000/goals', payload)
+      postData('http://localhost:3000/goals', payload).then(() => {
+        setProgress(6)
+      })
     } else {
       const newGoal = [...goal, payload]
       setGoal(newGoal)
+      setProgress(6)
     }
     // navigate('..')
   }
@@ -81,43 +85,59 @@ export default function GoalsDialogPicker() {
   return (
     <div>
       <GoalsDialog />
-      <Stack
-        direction='row'
-        spacing={2}
-        sx={{ display: 'flex', justifyContent: 'center' }}
-      >
-        <Button
-          sx={secondaryButtonStyle}
-          onClick={() => {
-            progress === 0
-              ? navigate('/my-goals')
-              : setProgress(progress !== 0 ? progress - 1 : 0)
-          }}
+      {dialog !== 'success' ? (
+        <Stack
+          direction='row'
+          spacing={2}
+          sx={{ display: 'flex', justifyContent: 'center' }}
         >
-          Back
-        </Button>
-        {dialog !== 'modifyGoal' && (
           <Button
-            sx={primaryButtonStyle}
-            disabled={progress === 5}
+            sx={secondaryButtonStyle}
             onClick={() => {
-              setProgress(progress !== 5 ? progress + 1 : questions.length - 1)
+              progress === 0
+                ? navigate('/my-goals')
+                : setProgress(progress !== 0 ? progress - 1 : 0)
             }}
           >
-            Next
+            Back
           </Button>
-        )}
-        {dialog === 'modifyGoal' && (
-          <Button
-            sx={primaryButtonStyle}
-            onClick={handleSubmit}
-            disabled={isLoading}
-            type='submit'
-          >
-            Submit
+          {dialog !== 'modifyGoal' && (
+            <Button
+              sx={primaryButtonStyle}
+              disabled={progress === 5}
+              onClick={() => {
+                setProgress(
+                  progress !== 5 ? progress + 1 : questions.length - 1
+                )
+              }}
+            >
+              Next
+            </Button>
+          )}
+          {dialog === 'modifyGoal' && (
+            <Button
+              sx={primaryButtonStyle}
+              onClick={handleSubmit}
+              disabled={isLoading}
+              type='submit'
+            >
+              Submit
+            </Button>
+          )}
+        </Stack>
+      ) : (
+        <Stack
+          sx={{
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+          }}
+        >
+          <Button sx={primaryButtonStyle} onClick={() => navigate('/my-goals')}>
+            Goals
           </Button>
-        )}
-      </Stack>
+        </Stack>
+      )}
     </div>
   )
 }
