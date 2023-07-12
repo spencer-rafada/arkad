@@ -11,7 +11,10 @@ import GoalItem from './GoalItem'
 
 export default function GoalList() {
   const theme = useTheme()
-  const { data, isLoading, error } = useFetchData('http://localhost:3000/goals')
+  const { user } = useAuth0()
+  const { data, isLoading, error } = useFetchData(
+    'http://localhost:3000/goals/user/' + encodeURIComponent(user?.sub)
+  )
   const navigate = useNavigate()
   const [goal, setGoal] = useLocalStorage('goal', '')
   const { isAuthenticated } = useAuth0()

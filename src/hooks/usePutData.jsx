@@ -1,25 +1,24 @@
 import { useState } from 'react'
 import axios from 'axios'
 
-export const usePostData = () => {
+export function usePutData() {
   const [isLoading, setIsLoading] = useState(false)
   const [error, setError] = useState(null)
   const [responseMsg, setResponseMsg] = useState(null)
 
-  const postData = async (url, data) => {
+  const putData = async (url, data) => {
     setIsLoading(true)
 
     try {
-      const response = await axios.post(url, data)
+      const response = await axios.put(url, data)
       if (response) {
         setResponseMsg(response)
       }
     } catch (error) {
       setError(error)
     }
-
     setIsLoading(false)
   }
 
-  return { postData, isLoading, error, responseMsg }
+  return { putData, isLoading, error, responseMsg }
 }

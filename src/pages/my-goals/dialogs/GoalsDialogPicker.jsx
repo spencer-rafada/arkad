@@ -31,7 +31,7 @@ export default function GoalsDialogPicker() {
   const theme = useTheme()
   const { postData, isLoading } = usePostData()
   const navigate = useNavigate()
-  const { isAuthenticated } = useAuth0()
+  const { isAuthenticated, user } = useAuth0()
   const [goal, setGoal] = useLocalStorage('goal', '')
 
   useEffect(() => {
@@ -70,10 +70,11 @@ export default function GoalsDialogPicker() {
       goalTitle,
       goalDescription,
       goalCreateDate,
-      goalDueDate: goalDueDate.$d,
+      goalDueDate: goalDueDate.$d ? goalDueDate.$d : goalDueDate,
       hasSavingsAccount,
       cost,
       complete,
+      userId: user.sub,
     }
     if (isAuthenticated) {
       postData('http://localhost:3000/goals', payload).then(() => {
