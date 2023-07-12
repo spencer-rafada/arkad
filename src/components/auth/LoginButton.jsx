@@ -20,6 +20,7 @@ export default function LoginButton() {
 
   return (
     <Button
+      data-testid='login-button'
       sx={buttonStyle}
       onClick={() =>
         loginWithRedirect({ appState: { targetUrl: window.location.pathname } })

@@ -5,9 +5,6 @@ export default function Auth0ProviderWithHistory({ children }) {
   const domain = import.meta.env.VITE_REACT_APP_AUTH0_DOMAIN
   const clientId = import.meta.env.VITE_REACT_APP_AUTH0_CLIENT_ID
 
-  console.log(domain)
-  console.log(clientId)
-
   return (
     <Auth0Provider
       domain={domain}

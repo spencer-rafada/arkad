@@ -3,13 +3,15 @@ import { GoalsCheckoutContext } from '../../../providers/GoalsCheckoutProvider'
 import { Slider, Typography } from '@mui/material'
 import { useTheme } from '@emotion/react'
 
-export default function MonthlyRevenue() {
-  const { monthlyRevenue, setMonthlyRevenue } = useContext(GoalsCheckoutContext)
+export default function MonthlyRevenue({ type }) {
+  const { monthlyRevenue, setMonthlyRevenue, cost, setCost } =
+    useContext(GoalsCheckoutContext)
   const theme = useTheme()
 
   // Monthly Revenue Handler Function
-  const monthlyRevenueChangeHandler = (event, newValue) => {
-    setMonthlyRevenue(newValue)
+  const sliderChangeHandler = (event, newValue) => {
+    if (type === 'monthlyRevenue') setMonthlyRevenue(newValue)
+    if (type === 'goalCost') setCost(newValue)
   }
 
   return (
@@ -18,9 +20,9 @@ export default function MonthlyRevenue() {
         min={0}
         max={10000}
         step={100}
-        defaultValue={5000}
+        defaultValue={0}
         sx={{ color: `${theme.palette.primary.primaryBtn}` }}
-        onChange={monthlyRevenueChangeHandler}
+        onChange={sliderChangeHandler}
       />
       <Typography
         variant='p'
@@ -29,7 +31,7 @@ export default function MonthlyRevenue() {
           fontSize: '1.2rem',
         }}
       >
-        {monthlyRevenue}
+        {type === 'monthlyRevenue' ? monthlyRevenue : cost}
       </Typography>
     </>
   )

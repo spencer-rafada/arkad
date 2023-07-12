@@ -4,9 +4,13 @@ import 'normalize.css'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import { ThemeProvider, createTheme } from '@mui/material/styles'
 import { ErrorPage, Home, LandingPage, MyGoals } from './pages/index'
+import GoalCreate from './pages/my-goals/dialogs/GoalCreate'
+import GoalList from './pages/my-goals/list/GoalList'
 import Auth0ProviderWithHistory from './providers/Auth0ProviderWithHistory'
 import AuthenticatedGuard from './components/auth/AuthenticatedGuard'
 import Navbar from './components/Navbar'
+import GoalDetail from './pages/my-goals/list/GoalDetail'
+import Profile from './pages/profile/Profile'
 
 const router = createBrowserRouter([
   {
@@ -30,6 +34,16 @@ const router = createBrowserRouter([
     errorElement: <ErrorPage />,
   },
   {
+    path: '/profile',
+    element: (
+      <>
+        <Navbar />
+        <Profile />
+      </>
+    ),
+    errorElement: <ErrorPage />,
+  },
+  {
     path: '/my-goals',
     element: (
       <>
@@ -37,6 +51,20 @@ const router = createBrowserRouter([
         <MyGoals />
       </>
     ),
+    children: [
+      {
+        index: true,
+        element: <GoalList />,
+      },
+      {
+        path: 'create',
+        element: <GoalCreate />,
+      },
+      {
+        path: ':goalId',
+        element: <AuthenticatedGuard component={GoalDetail} />,
+      },
+    ],
     errorElement: <ErrorPage />,
   },
   // This is how to protect guards

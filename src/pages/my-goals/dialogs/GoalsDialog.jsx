@@ -66,7 +66,7 @@ export default function GoalsDialog() {
                 letterSpacing: '0.2rem',
               }}
             >
-              {progress + 1} of {questions.length} : {dialog}
+              {progress !== 6 ? progress + 1 : 6} of {questions.length}
             </Typography>
           </Stack>
         </Box>
@@ -105,7 +105,9 @@ export default function GoalsDialog() {
             color: `${theme.palette.primary.text}`,
           }}
         >
-          {questions[progress].question}
+          {progress !== 7
+            ? questions[progress].question
+            : 'Successfully added goal! 🎉'}
         </Typography>
         <Box
           sx={{
@@ -116,7 +118,7 @@ export default function GoalsDialog() {
             alignItems: 'center',
           }}
         >
-          {dialog === 'monthlyRevenue' && <MonthlyRevenue />}
+          {dialog === 'monthlyRevenue' && <MonthlyRevenue type={dialog} />}
           {dialog === 'separateMoney' && <Separated />}
           {dialog === 'hasSavings' && <Separated />}
           {dialog === 'wantMaterial' && (
@@ -126,17 +128,22 @@ export default function GoalsDialog() {
             />
           )}
           {dialog === 'goalDueDate' && <GoalDueDatePicker />}
+          {dialog === 'goalCost' && <MonthlyRevenue type={dialog} />}
           {dialog === 'modifyGoal' && (
             <Stack direction='column' spacing={2} sx={{ width: '60%' }}>
               <TextField
                 label='Goal Name'
                 sx={{ backgroundColor: 'white' }}
                 onChange={(e) => setGoalTitle(e.target.value)}
+                required
               />
               <TextField
                 label='Goal Description'
                 sx={{ backgroundColor: 'white' }}
                 onChange={(e) => setGoalDescription(e.target.value)}
+                required
+                multiline
+                rows={4}
               />
             </Stack>
           )}

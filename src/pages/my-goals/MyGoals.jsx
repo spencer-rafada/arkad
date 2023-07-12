@@ -1,7 +1,7 @@
 import { Container } from '@mui/material'
 import { css } from '@emotion/react'
 import { useTheme } from '@mui/material/styles'
-import GoalsDialogPicker from './dialogs/GoalsDialogPicker'
+import { Outlet } from 'react-router-dom'
 import { GoalsCheckoutProvider } from '../../providers/GoalsCheckoutProvider'
 
 export default function MyGoals() {
@@ -16,11 +16,13 @@ export default function MyGoals() {
   `
 
   return (
-    <GoalsCheckoutProvider>
-      <Container maxWidth='xl' sx={containerStyle}>
-        <GoalsDialogPicker />
-      </Container>
-    </GoalsCheckoutProvider>
+    <>
+      <GoalsCheckoutProvider>
+        <Container maxWidth='xl' sx={containerStyle}>
+          <Outlet />
+        </Container>
+      </GoalsCheckoutProvider>
+    </>
     // Put a conditional for goal list here
   )
 }
