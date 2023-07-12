@@ -1,5 +1,9 @@
 import GoalsDialogPicker from './GoalsDialogPicker'
 
 export default function GoalCreate() {
-  return <GoalsDialogPicker />
+  return (
+    <div data-testid='goal-create'>
+      <GoalsDialogPicker />
+    </div>
+  )
 }

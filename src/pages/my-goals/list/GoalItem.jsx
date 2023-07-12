@@ -33,8 +33,13 @@ export default function GoalItem({ item, index, isAuthenticated }) {
   const theme = useTheme()
 
   return (
-    <Paper elevation={2} sx={{ marginBottom: '0.4rem' }}>
+    <Paper
+      elevation={2}
+      sx={{ marginBottom: '0.4rem' }}
+      data-testid='goal-item'
+    >
       <ListItemButton
+        data-testid='update-goal-button'
         onClick={() =>
           isAuthenticated ? navigateTo(item._id) : handleCheckComplete
         }

@@ -46,7 +46,7 @@ export default function GoalDetail() {
   }, [currentGoal])
 
   return (
-    <>
+    <div data-testid='goal-detail'>
       {data && !isLoading && (
         <List
           sx={{ bgcolor: 'background.paper' }}
@@ -91,6 +91,6 @@ export default function GoalDetail() {
           </Collapse>
         </List>
       )}
-    </>
+    </div>
   )
 }
