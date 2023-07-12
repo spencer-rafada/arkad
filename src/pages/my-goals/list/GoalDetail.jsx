@@ -65,7 +65,7 @@ export default function GoalDetail() {
               primary={'Keep yourself accountable.'}
               secondary={`It will take ${
                 data.subGoals.biWeeks * 2
-              } weeks to achieve your goal.`}
+              } weeks to achieve your goal just from your monthly revenue.`}
             ></ListItemText>
             {open ? <ExpandLess /> : <ExpandMore />}
           </ListItemButton>
