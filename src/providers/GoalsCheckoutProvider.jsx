@@ -14,7 +14,7 @@ const GoalsCheckoutContext = createContext(null)
 // hasSavings : bool
 
 function GoalsCheckoutProvider({ children }) {
-  const [monthlyRevenue, setMonthlyRevenue] = useState(5000)
+  const [monthlyRevenue, setMonthlyRevenue] = useState(0)
   const [isSeparate, setIsSeparate] = useState(false)
   const [wantMaterial, setWantMaterial] = useState(false)
   const [materialGoal, setMaterialGoal] = useState()

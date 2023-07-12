@@ -26,6 +26,7 @@ export default function GoalsDialogPicker() {
     goalDueDate,
     hasSavingsAccount,
     complete,
+    cost,
   } = useContext(GoalsCheckoutContext)
   const theme = useTheme()
   const { postData, isLoading } = usePostData()
@@ -71,11 +72,12 @@ export default function GoalsDialogPicker() {
       goalCreateDate,
       goalDueDate: goalDueDate.$d,
       hasSavingsAccount,
+      cost,
       complete,
     }
     if (isAuthenticated) {
       postData('http://localhost:3000/goals', payload).then(() => {
-        setProgress(6)
+        setProgress(7)
       })
     } else {
       const newGoal = [...goal, payload]

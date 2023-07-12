@@ -118,7 +118,7 @@ export default function GoalsDialog() {
             alignItems: 'center',
           }}
         >
-          {dialog === 'monthlyRevenue' && <MonthlyRevenue />}
+          {dialog === 'monthlyRevenue' && <MonthlyRevenue type={dialog} />}
           {dialog === 'separateMoney' && <Separated />}
           {dialog === 'hasSavings' && <Separated />}
           {dialog === 'wantMaterial' && (
@@ -128,6 +128,7 @@ export default function GoalsDialog() {
             />
           )}
           {dialog === 'goalDueDate' && <GoalDueDatePicker />}
+          {dialog === 'goalCost' && <MonthlyRevenue type={dialog} />}
           {dialog === 'modifyGoal' && (
             <Stack direction='column' spacing={2} sx={{ width: '60%' }}>
               <TextField
