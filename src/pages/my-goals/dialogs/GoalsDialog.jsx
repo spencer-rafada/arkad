@@ -105,7 +105,7 @@ export default function GoalsDialog() {
             color: `${theme.palette.primary.text}`,
           }}
         >
-          {progress !== 6
+          {progress !== 7
             ? questions[progress].question
             : 'Successfully added goal! 🎉'}
         </Typography>

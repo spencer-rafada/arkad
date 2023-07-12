@@ -9,6 +9,10 @@ export const questions = [
     question: 'What are you saving for? (vacation, car, house, etc...)',
     quote: '',
   },
+  {
+    question: 'How much does it cost? (Rough estimate)',
+    quote: '',
+  },
   { question: 'When do you want to achieve this goal?', quote: '' },
   { question: 'Customize your goal.', quote: '' },
 ]

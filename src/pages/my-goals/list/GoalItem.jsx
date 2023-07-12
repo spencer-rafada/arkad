@@ -1,12 +1,14 @@
-import { List, ListItemButton, ListItemText } from '@mui/material'
+import { List, ListItemButton, ListItemText, Paper } from '@mui/material'
 import CircleOutlinedIcon from '@mui/icons-material/CircleOutlined'
 import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline'
 import { useState } from 'react'
 import useLocalStorage from '../../../hooks/useLocalStorage'
+import { useNavigate } from 'react-router-dom'
 
 export default function GoalItem({ item, index, isAuthenticated }) {
   const [complete, setComplete] = useState(item.complete)
   const [goals, setGoals] = useLocalStorage('goal')
+  const navigate = useNavigate()
 
   const handleCheckComplete = () => {
     const updatedComplete = !complete
@@ -17,9 +19,17 @@ export default function GoalItem({ item, index, isAuthenticated }) {
     setGoals(updatedGoals)
   }
 
+  const navigateTo = (id) => {
+    navigate(id)
+  }
+
   return (
-    <List sx={{ marginBottom: '0.5rem' }}>
-      <ListItemButton onClick={handleCheckComplete}>
+    <Paper elevation={2} sx={{ marginBottom: '0.4rem' }}>
+      <ListItemButton
+        onClick={() =>
+          isAuthenticated ? navigateTo(item._id) : handleCheckComplete
+        }
+      >
         <ListItemText
           primary={item.goalTitle}
           secondary={`${item.goalDescription} ${
@@ -33,6 +43,6 @@ export default function GoalItem({ item, index, isAuthenticated }) {
           </ListItemText>
         )}
       </ListItemButton>
-    </List>
+    </Paper>
   )
 }

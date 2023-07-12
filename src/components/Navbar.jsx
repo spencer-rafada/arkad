@@ -21,10 +21,10 @@ import { useAuth0 } from '@auth0/auth0-react'
 import { Divider } from '@mui/material'
 
 const pages = [
-  { page: 'Features', route: 'features' },
+  { page: 'Goals', route: 'my-goals' },
   // { page: 'Features', route: 'features' },
 ]
-const settings = ['Profile', 'Account', 'Dashboard', 'Logout']
+const settings = ['Profile', 'Account', 'Dashboard']
 
 function Navbar() {
   const [anchorElNav, setAnchorElNav] = React.useState(null)

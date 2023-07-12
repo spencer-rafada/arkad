@@ -19,7 +19,7 @@ export default function GoalList() {
 
   useEffect(() => {
     if (isAuthenticated) {
-      setList(data)
+      setList(data ? data : [])
     } else {
       setList(goal ? goal : [])
     }

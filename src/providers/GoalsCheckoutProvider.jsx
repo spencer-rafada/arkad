@@ -28,6 +28,7 @@ function GoalsCheckoutProvider({ children }) {
   const [progress, setProgress] = useState(0)
   const [dialog, setDialog] = useState('monthlyRevenue')
   const [complete, setComplete] = useState(false)
+  const [cost, setCost] = useState(0)
 
   return (
     <GoalsCheckoutContext.Provider
@@ -56,6 +57,8 @@ function GoalsCheckoutProvider({ children }) {
         setDialog,
         complete,
         setComplete,
+        cost,
+        setCost,
       }}
     >
       {children}

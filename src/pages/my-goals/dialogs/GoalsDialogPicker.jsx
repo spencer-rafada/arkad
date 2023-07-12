@@ -38,9 +38,10 @@ export default function GoalsDialogPicker() {
     if (progress === 1) setDialog('separateMoney')
     if (progress === 2) setDialog('hasSavings')
     if (progress === 3) setDialog('wantMaterial')
-    if (progress === 4) setDialog('goalDueDate')
-    if (progress === 5) setDialog('modifyGoal')
-    if (progress === 6) setDialog('success')
+    if (progress === 4) setDialog('goalCost')
+    if (progress === 5) setDialog('goalDueDate')
+    if (progress === 6) setDialog('modifyGoal')
+    if (progress === 7) setDialog('success')
   }, [progress, setDialog])
 
   // Styles
@@ -79,7 +80,7 @@ export default function GoalsDialogPicker() {
     } else {
       const newGoal = [...goal, payload]
       setGoal(newGoal)
-      setProgress(6)
+      setProgress(7)
     }
     // navigate('..')
   }
@@ -106,10 +107,10 @@ export default function GoalsDialogPicker() {
           {dialog !== 'modifyGoal' && (
             <Button
               sx={primaryButtonStyle}
-              disabled={progress === 5}
+              disabled={progress === 6}
               onClick={() => {
                 setProgress(
-                  progress !== 5 ? progress + 1 : questions.length - 1
+                  progress !== 6 ? progress + 1 : questions.length - 1
                 )
               }}
             >
@@ -135,7 +136,13 @@ export default function GoalsDialogPicker() {
             alignItems: 'center',
           }}
         >
-          <Button sx={primaryButtonStyle} onClick={() => navigate('/my-goals')}>
+          <Button
+            sx={primaryButtonStyle}
+            onClick={() => {
+              setProgress(0)
+              navigate('/my-goals')
+            }}
+          >
             Goals
           </Button>
         </Stack>
