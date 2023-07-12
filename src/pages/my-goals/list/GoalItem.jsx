@@ -1,4 +1,12 @@
-import { List, ListItemButton, ListItemText, Paper } from '@mui/material'
+import {
+  List,
+  ListItemButton,
+  ListItemText,
+  Paper,
+  Stack,
+  Typography,
+  useTheme,
+} from '@mui/material'
 import CircleOutlinedIcon from '@mui/icons-material/CircleOutlined'
 import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline'
 import { useState } from 'react'
@@ -22,6 +30,7 @@ export default function GoalItem({ item, index, isAuthenticated }) {
   const navigateTo = (id) => {
     navigate(id)
   }
+  const theme = useTheme()
 
   return (
     <Paper elevation={2} sx={{ marginBottom: '0.4rem' }}>
@@ -30,13 +39,33 @@ export default function GoalItem({ item, index, isAuthenticated }) {
           isAuthenticated ? navigateTo(item._id) : handleCheckComplete
         }
       >
-        <ListItemText
-          primary={item.goalTitle}
-          secondary={`${item.goalDescription} ${
-            item.goalDueDate ? `- ${item.goalDueDate}` : ``
-          }`}
-          sx={{ width: '100%' }}
-        />
+        <Stack
+          direction={'row'}
+          sx={{
+            display: 'flex',
+            justifyContent: 'space-between',
+            width: '100%',
+            alignItems: 'center',
+          }}
+        >
+          <ListItemText
+            primary={item.goalTitle}
+            secondary={`${item.goalDescription} ${
+              item.goalDueDate ? `- ${item.goalDueDate}` : ``
+            }`}
+            sx={{ width: '100%' }}
+          />
+          {isAuthenticated && (
+            <Typography
+              sx={{
+                color: `${theme.palette.primary.primaryBtn}`,
+                letterSpacing: '0.15rem',
+              }}
+            >
+              ${item.savings}/${item.cost}
+            </Typography>
+          )}
+        </Stack>
         {!isAuthenticated && (
           <ListItemText color='success'>
             {complete ? <CheckCircleOutlineIcon /> : <CircleOutlinedIcon />}
