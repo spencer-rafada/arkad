@@ -1,28 +1,50 @@
 import { Box, Divider, Stack, Typography } from '@mui/material'
 import React from 'react'
 import MonetizationOnIcon from '@mui/icons-material/MonetizationOn'
+import { useTheme } from '@emotion/react'
 
 export default function Savings() {
+  const theme = useTheme()
   return (
     <div data-testid='resource-savings'>
-      <Box>
+      <Box
+        sx={{
+          backgroundColor: 'background.paper',
+          padding: '1rem',
+          borderRadius: '1rem',
+          color: `${theme.palette.primary.text}`,
+        }}
+      >
         <Stack spacing={1} direction='column'>
           <Stack
             spacing={1}
             direction='row'
             sx={{ display: 'flex', alignItems: 'center' }}
           >
-            <MonetizationOnIcon fontSize='large' />
+            <MonetizationOnIcon
+              fontSize='large'
+              sx={{
+                color: `${theme.palette.primary.primaryBtn}`,
+              }}
+            />
             <Typography
               variant='h1'
-              sx={{ fontWeight: '400', fontSize: '2.5rem' }}
+              sx={{
+                fontWeight: '400',
+                fontSize: '2.5rem',
+                color: `${theme.palette.primary.primaryBtn}`,
+              }}
             >
               Savings
             </Typography>
           </Stack>
           <Typography
             variant='h3'
-            sx={{ fontSize: '1.2rem', fontStyle: 'italic' }}
+            sx={{
+              fontSize: '1.2rem',
+              fontStyle: 'italic',
+              color: `${theme.palette.primary.accent}`,
+            }}
           >
             Arkad's First Cure: Start thy purse to fattening
           </Typography>
@@ -42,7 +64,10 @@ export default function Savings() {
               variant='a'
               component='a'
               href='https://www.reddit.com/r/personalfinance/wiki/banks_and_credit_unions/#wiki_what_banks_or_credit_unions_does_pf_recommend.3F'
-              sx={{ textDecoration: 'none' }}
+              sx={{
+                textDecoration: 'none',
+                color: `${theme.palette.primary.primaryBtn}`,
+              }}
             >
               resource
             </Typography>{' '}

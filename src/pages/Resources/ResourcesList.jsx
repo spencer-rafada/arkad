@@ -1,8 +1,10 @@
+import { useTheme } from '@emotion/react'
 import { Divider, List, ListItemButton, ListItemText } from '@mui/material'
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 
 export default function ResourcesList({ resources }) {
+  const theme = useTheme()
   const navigate = useNavigate()
   const [selectedIndex, setSelectedIndex] = useState(null)
 
@@ -12,7 +14,7 @@ export default function ResourcesList({ resources }) {
   }
 
   return (
-    <List>
+    <List sx={{ color: `${theme.palette.primary.text}` }}>
       <ListItemText primary={'Resources'}></ListItemText>
       {resources.map((item, index) => {
         return (

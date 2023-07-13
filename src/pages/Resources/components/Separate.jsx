@@ -1,28 +1,50 @@
 import React from 'react'
 import { Box, Divider, Stack, Typography } from '@mui/material'
 import PercentIcon from '@mui/icons-material/Percent'
+import { useTheme } from '@emotion/react'
 
 export default function Separate() {
+  const theme = useTheme()
   return (
     <div data-testid='resource-10percent'>
-      <Box>
+      <Box
+        sx={{
+          backgroundColor: 'background.paper',
+          padding: '1rem',
+          borderRadius: '1rem',
+          color: `${theme.palette.primary.text}`,
+        }}
+      >
         <Stack spacing={1} direction='column'>
           <Stack
             spacing={1}
             direction='row'
             sx={{ display: 'flex', alignItems: 'center' }}
           >
-            <PercentIcon fontSize='large' />
+            <PercentIcon
+              fontSize='large'
+              sx={{
+                color: `${theme.palette.primary.primaryBtn}`,
+              }}
+            />
             <Typography
               variant='h1'
-              sx={{ fontWeight: '400', fontSize: '2.5rem' }}
+              sx={{
+                fontWeight: '400',
+                fontSize: '2.5rem',
+                color: `${theme.palette.primary.primaryBtn}`,
+              }}
             >
               Rule of 10%
             </Typography>
           </Stack>
           <Typography
             variant='h3'
-            sx={{ fontSize: '1.2rem', fontStyle: 'italic' }}
+            sx={{
+              fontSize: '1.2rem',
+              fontStyle: 'italic',
+              color: `${theme.palette.primary.accent}`,
+            }}
           >
             A Part Of All You Earn Is Yours To Keep
           </Typography>
