@@ -28,10 +28,10 @@ export default function MonthlyRevenue({ type }) {
         variant='p'
         sx={{
           color: `${theme.palette.primary.text}`,
-          fontSize: '1.2rem',
+          fontSize: '1.5rem',
         }}
       >
-        {type === 'monthlyRevenue' ? monthlyRevenue : cost}
+        $ {type === 'monthlyRevenue' ? monthlyRevenue : cost}
       </Typography>
     </>
   )
