@@ -17,7 +17,7 @@ export default function Resources() {
   const resources = [
     { name: 'Savings', route: 'savings' },
     { name: 'Rule of 10%', route: 'separate' },
-    { name: 'Accountability', route: 'accountability' },
+    // { name: 'Accountability', route: 'accountability' },
   ]
 
   // Styles

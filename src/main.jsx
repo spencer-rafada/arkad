@@ -61,7 +61,7 @@ const router = createBrowserRouter([
         path: 'savings',
         element: <Savings />,
       },
-      { path: 'accountability', element: <Accountability /> },
+      // { path: 'accountability', element: <Accountability /> },
       { path: 'separate', element: <Separate /> },
     ],
     errorElement: <ErrorPage />,
