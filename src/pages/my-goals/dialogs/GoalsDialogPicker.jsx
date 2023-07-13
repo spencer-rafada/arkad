@@ -74,7 +74,7 @@ export default function GoalsDialogPicker() {
       hasSavingsAccount,
       cost,
       complete,
-      userId: user.sub,
+      userId: user ? user.sub : 'local',
     }
     if (isAuthenticated) {
       postData('http://localhost:3000/goals', payload).then(() => {

@@ -16,12 +16,13 @@ import LogoutButton from '../components/auth/LogoutButton'
 import LoginButton from '../components/auth/LoginButton'
 import { css } from '@emotion/react'
 import { useTheme } from '@mui/material/styles'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { useAuth0 } from '@auth0/auth0-react'
 import { Divider } from '@mui/material'
 
 const pages = [
   { page: 'Goals', route: 'my-goals' },
+  { page: 'Resources', route: 'resources' },
   // { page: 'Features', route: 'features' },
 ]
 const settings = ['Profile', 'Account', 'Dashboard']
@@ -31,6 +32,7 @@ function Navbar() {
   const [anchorElUser, setAnchorElUser] = React.useState(null)
   const theme = useTheme()
   const { isAuthenticated } = useAuth0()
+  const navigate = useNavigate()
 
   // Style
   const navbarStyle = css`
@@ -67,7 +69,9 @@ function Navbar() {
             variant='h6'
             noWrap
             component='a'
-            href='/'
+            onClick={() => {
+              navigate('/')
+            }}
             sx={{
               mr: 2,
               display: { xs: 'none', md: 'flex' },
@@ -75,6 +79,7 @@ function Navbar() {
               letterSpacing: '.3rem',
               color: 'inherit',
               textDecoration: 'none',
+              cursor: 'pointer',
             }}
             data-testid='desktop-title'
           >
@@ -129,7 +134,9 @@ function Navbar() {
             variant='h5'
             noWrap
             component='a'
-            href=''
+            onClick={() => {
+              navigate('/')
+            }}
             sx={{
               mr: 2,
               display: { xs: 'flex', md: 'none' },
@@ -138,6 +145,7 @@ function Navbar() {
               letterSpacing: '.3rem',
               color: 'inherit',
               textDecoration: 'none',
+              cursor: 'pointer',
             }}
             data-testid='mobile-title'
           >

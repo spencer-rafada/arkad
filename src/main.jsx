@@ -11,6 +11,7 @@ import AuthenticatedGuard from './components/auth/AuthenticatedGuard'
 import Navbar from './components/Navbar'
 import GoalDetail from './pages/my-goals/list/GoalDetail'
 import Profile from './pages/profile/Profile'
+import Resources from './pages/Resources/Resources'
 
 const router = createBrowserRouter([
   {
@@ -39,6 +40,16 @@ const router = createBrowserRouter([
       <>
         <Navbar />
         <Profile />
+      </>
+    ),
+    errorElement: <ErrorPage />,
+  },
+  {
+    path: '/resources',
+    element: (
+      <>
+        <Navbar />
+        <Resources />
       </>
     ),
     errorElement: <ErrorPage />,
