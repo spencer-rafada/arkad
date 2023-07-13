@@ -12,6 +12,10 @@ import Navbar from './components/Navbar'
 import GoalDetail from './pages/my-goals/list/GoalDetail'
 import Profile from './pages/profile/Profile'
 import Resources from './pages/Resources/Resources'
+import Savings from './pages/Resources/components/Savings'
+import Accountability from './pages/Resources/components/Accountability'
+import Separate from './pages/Resources/components/Separate'
+import NotFound from './pages/NotFound'
 
 const router = createBrowserRouter([
   {
@@ -52,6 +56,14 @@ const router = createBrowserRouter([
         <Resources />
       </>
     ),
+    children: [
+      {
+        path: 'savings',
+        element: <Savings />,
+      },
+      { path: 'accountability', element: <Accountability /> },
+      { path: 'separate', element: <Separate /> },
+    ],
     errorElement: <ErrorPage />,
   },
   {
@@ -78,6 +90,7 @@ const router = createBrowserRouter([
     ],
     errorElement: <ErrorPage />,
   },
+  { path: '*', element: <NotFound />, errorElement: <ErrorPage /> },
   // This is how to protect guards
   // {
   //   path: '/profiles',
