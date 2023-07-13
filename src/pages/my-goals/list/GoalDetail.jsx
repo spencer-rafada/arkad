@@ -15,6 +15,7 @@ import ExpandMore from '@mui/icons-material/ExpandMore'
 import CircleOutlinedIcon from '@mui/icons-material/CircleOutlined'
 import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline'
 import { usePutData } from '../../../hooks/usePutData'
+import GoalResources from './GoalResources'
 
 export default function GoalDetail() {
   const params = useParams()
@@ -48,48 +49,55 @@ export default function GoalDetail() {
   return (
     <div data-testid='goal-detail'>
       {data && !isLoading && (
-        <List
-          sx={{ bgcolor: 'background.paper' }}
-          subheader={<ListSubheader>Grow your Finance!</ListSubheader>}
-        >
-          <ListItemText
-            sx={{ paddingLeft: '1rem', paddingRight: '1rem' }}
-            primary={data.goalTitle}
-            secondary={data.goalDescription}
-          ></ListItemText>
-          <ListItemButton onClick={() => setOpen(!open)}>
-            <ListItemIcon>
-              <TrendingUpIcon />
-            </ListItemIcon>
+        <>
+          <List
+            sx={{ bgcolor: 'background.paper', marginBottom: '1rem' }}
+            subheader={<ListSubheader>Grow your Finance!</ListSubheader>}
+          >
             <ListItemText
-              primary={'Keep yourself accountable.'}
-              secondary={`It will take ${
-                data.subGoals.biWeeks * 2
-              } weeks to achieve your goal just from your monthly revenue.`}
+              sx={{ paddingLeft: '1rem', paddingRight: '1rem' }}
+              primary={data.goalTitle}
+              secondary={data.goalDescription}
             ></ListItemText>
-            {open ? <ExpandLess /> : <ExpandMore />}
-          </ListItemButton>
-          <Collapse in={open} timeout='auto' unmountOnExit>
-            <List disablePadding>
-              {data.subGoals.biWeekDates.map((item, index) => {
-                return (
-                  <div key={index}>
-                    <ListItemButton onClick={() => handleDateIndexClick(index)}>
-                      <ListItemIcon>
-                        {item.complete ? (
-                          <CheckCircleOutlineIcon />
-                        ) : (
-                          <CircleOutlinedIcon />
-                        )}
-                      </ListItemIcon>
-                      <ListItemText primary={item.date}></ListItemText>
-                    </ListItemButton>
-                  </div>
-                )
-              })}
-            </List>
-          </Collapse>
-        </List>
+            <ListItemButton onClick={() => setOpen(!open)}>
+              <ListItemIcon>
+                <TrendingUpIcon />
+              </ListItemIcon>
+              <ListItemText
+                primary={'Keep yourself accountable.'}
+                secondary={`It will take ${
+                  data.subGoals.biWeeks * 2
+                } weeks to achieve your goal just from your monthly revenue.`}
+              ></ListItemText>
+              {open ? <ExpandLess /> : <ExpandMore />}
+            </ListItemButton>
+            <Collapse in={open} timeout='auto' unmountOnExit>
+              <List disablePadding>
+                {data.subGoals.biWeekDates.map((item, index) => {
+                  return (
+                    <div key={index}>
+                      <ListItemButton
+                        onClick={() => handleDateIndexClick(index)}
+                      >
+                        <ListItemIcon>
+                          {item.complete ? (
+                            <CheckCircleOutlineIcon />
+                          ) : (
+                            <CircleOutlinedIcon />
+                          )}
+                        </ListItemIcon>
+                        <ListItemText primary={item.date}></ListItemText>
+                      </ListItemButton>
+                    </div>
+                  )
+                })}
+              </List>
+            </Collapse>
+          </List>
+          {(data.isSeparate || data.hasSavingsAccount) && (
+            <GoalResources data={data} />
+          )}
+        </>
       )}
     </div>
   )
