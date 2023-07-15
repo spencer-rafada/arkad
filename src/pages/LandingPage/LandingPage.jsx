@@ -12,19 +12,16 @@ export default function LandingPage() {
   const containerStyle = css`
     background-color: ${theme.palette.primary.main};
     color: ${theme.palette.primary.primaryBtn};
-    width: 100%;
-    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 85vh;
+    overflow: scroll;
   `
 
   return (
     <Container maxWidth='xl' sx={containerStyle}>
-      <Grid
-        container
-        spacing={3}
-        sx={{
-          padding: '2rem',
-        }}
-      >
+      <Grid container spacing={3}>
         <Grid
           item
           xs={6}
@@ -69,6 +66,7 @@ export default function LandingPage() {
                       backgroundColor: `${theme.palette.primary.primaryBtn}`,
                     },
                     marginTop: '1rem',
+                    padding: '0.8rem',
                   }}
                   onClick={() => navigate('my-goals')}
                 >
@@ -79,7 +77,7 @@ export default function LandingPage() {
           </Stack>
         </Grid>
         <Grid item xs={6}>
-          <Box sx={{ display: 'flex', justifyContent: 'end' }}>
+          <Box sx={{ display: 'flex', justifyContent: 'center' }}>
             <img
               src={ArkadHomeImage}
               alt='Arkad Home Page'
