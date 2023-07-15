@@ -20,12 +20,14 @@ export default function GoalResources({ data }) {
         spacing={1}
         color={`${theme.palette.primary.text}`}
       >
-        <Typography variant='h3' sx={{ fontSize: '1.5rem' }}>
-          Resources
-        </Typography>
-        <Typography varian='p'>
-          Some useful resources according to your goal.
-        </Typography>
+        <>
+          <Typography variant='h3' sx={{ fontSize: '1.5rem' }}>
+            Resources
+          </Typography>
+          <Typography varian='p'>
+            Some useful resources according to your goal.
+          </Typography>
+        </>
       </Stack>
       <List sx={{ backgroundColor: 'background.paper' }}>
         {data.hasSavingsAccount && (
