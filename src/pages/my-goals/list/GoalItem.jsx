@@ -20,11 +20,10 @@ export default function GoalItem({ item, index, isAuthenticated }) {
   const navigate = useNavigate()
 
   const handleCheckComplete = () => {
-    const updatedComplete = !complete
-    setComplete(updatedComplete)
+    setComplete(!complete)
 
     const updatedGoals = [...goals]
-    updatedGoals[index].complete = updatedComplete
+    updatedGoals[index].complete = !complete
     setGoals(updatedGoals)
   }
 
@@ -42,7 +41,7 @@ export default function GoalItem({ item, index, isAuthenticated }) {
       <ListItemButton
         data-testid='update-goal-button'
         onClick={() =>
-          isAuthenticated ? navigateTo(item._id) : handleCheckComplete
+          isAuthenticated ? navigateTo(item._id) : handleCheckComplete()
         }
       >
         <Stack

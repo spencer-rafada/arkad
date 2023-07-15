@@ -17,8 +17,8 @@ export default function Profile() {
   const containerStyle = css`
     background-color: ${theme.palette.primary.main};
     color: ${theme.palette.primary.primaryBtn};
-    width: 100%;
-    height: 1080px;
+    height: 85vh;
+    overflow: scroll;
     padding: 1rem;
   `
 
