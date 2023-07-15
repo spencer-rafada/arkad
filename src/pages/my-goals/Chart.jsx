@@ -4,13 +4,14 @@ import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip } from 'recharts'
 import useGoalChartDetail from '../../hooks/useGoalChartDetail'
 
 export default function Chart({ data }) {
+  console.log(data)
   const theme = useTheme()
   const chartData = useGoalChartDetail(data)
 
   return (
     <>
       {data && (
-        <>
+        <div data-testid='chart'>
           <Typography
             color={`${theme.palette.primary.text}`}
             fontSize={'1.5rem'}
@@ -33,7 +34,7 @@ export default function Chart({ data }) {
             <YAxis />
             <Tooltip />
           </LineChart>
-        </>
+        </div>
       )}
     </>
   )
