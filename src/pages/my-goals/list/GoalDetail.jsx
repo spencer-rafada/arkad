@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import { useFetchData } from '../../../hooks/useFetchData'
 import {
+  Box,
   Collapse,
   List,
   ListItemButton,
@@ -18,6 +19,7 @@ import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline'
 import { usePutData } from '../../../hooks/usePutData'
 import GoalResources from './GoalResources'
 import { formatDate } from '../../../utils/index'
+import Chart from '../Chart'
 
 export default function GoalDetail() {
   const params = useParams()
@@ -116,6 +118,11 @@ export default function GoalDetail() {
               </List>
             </Collapse>
           </List>
+          {data && !isLoading && (
+            <Box>
+              <Chart data={data} />
+            </Box>
+          )}
           {(data.isSeparate || data.hasSavingsAccount) && (
             <GoalResources data={data} />
           )}
