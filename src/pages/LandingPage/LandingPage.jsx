@@ -14,7 +14,7 @@ export default function LandingPage() {
   const { postData } = usePostData()
   const [userId, setUserId] = useLocalStorage('userId', '')
   const navigate = useNavigate()
-  
+
   useEffect(() => {
     if (!isAuthenticated) return
     const newUser = {
@@ -23,7 +23,10 @@ export default function LandingPage() {
       tokenData: user,
     }
     const fetchUser = async () => {
-      const response = await postData(`http://localhost:3000/user`, newUser)
+      const response = await postData(
+        `https://arkad-be.onrender.com/user`,
+        newUser
+      )
       setUserId(response.userId)
     }
     fetchUser()

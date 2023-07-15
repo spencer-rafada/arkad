@@ -9,7 +9,7 @@ import { Box, Typography } from '@mui/material'
 export default function Profile() {
   const [userId, setUserId] = useLocalStorage('userId', '')
   const { data, isLoading } = useFetchData(
-    `http://localhost:3000/user/${userId}`
+    `https://arkad-be.onrender.com/user/${userId}`
   )
   const theme = useTheme()
 

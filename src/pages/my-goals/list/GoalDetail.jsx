@@ -26,7 +26,7 @@ export default function GoalDetail() {
   const goalId = params.goalId
   const [open, setOpen] = useState(false)
   const { data, isLoading, error } = useFetchData(
-    `http://localhost:3000/goals/${goalId}`
+    `https://arkad-be.onrender.com/goals/${goalId}`
   )
   const [currentGoal, setCurrentGoal] = useState()
   const { putData } = usePutData()
@@ -49,7 +49,7 @@ export default function GoalDetail() {
   }
 
   useEffect(() => {
-    putData(`http://localhost:3000/goals/${goalId}`, currentGoal)
+    putData(`https://arkad-be.onrender.com/goals/${goalId}`, currentGoal)
   }, [currentGoal])
 
   return (

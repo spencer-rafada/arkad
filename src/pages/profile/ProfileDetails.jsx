@@ -24,7 +24,7 @@ export default function ProfileDetails({ data }) {
 
   const submitInfo = () => {
     const payload = { ...data, firstName: firstName, lastName: lastName }
-    putData(`http://localhost:3000/user/${data._id}`, payload)
+    putData(`https://arkad-be.onrender.com/user/${data._id}`, payload)
     toggleEdit()
   }
 

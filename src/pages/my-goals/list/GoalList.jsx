@@ -13,7 +13,7 @@ export default function GoalList() {
   const theme = useTheme()
   const { user } = useAuth0()
   const { data, isLoading, error } = useFetchData(
-    'http://localhost:3000/goals/user/' + encodeURIComponent(user?.sub)
+    'https://arkad-be.onrender.com/goals/user/' + encodeURIComponent(user?.sub)
   )
   const navigate = useNavigate()
   const [goal, setGoal] = useLocalStorage('goal', '')

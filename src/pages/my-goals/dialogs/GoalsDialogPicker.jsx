@@ -77,7 +77,7 @@ export default function GoalsDialogPicker() {
       userId: user ? user.sub : 'local',
     }
     if (isAuthenticated) {
-      postData('http://localhost:3000/goals', payload).then(() => {
+      postData('https://arkad-be.onrender.com/goals', payload).then(() => {
         setProgress(7)
       })
     } else {
