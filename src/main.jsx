@@ -46,7 +46,7 @@ const router = createBrowserRouter([
     element: (
       <>
         <Navbar />
-        <Profile />
+        <AuthenticatedGuard component={Profile} />
         <Footer />
       </>
     ),

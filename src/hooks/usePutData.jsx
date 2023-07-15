@@ -11,7 +11,7 @@ export function usePutData() {
 
     try {
       const response = await axios.put(url, data)
-      if (response) {
+      if (response.status === 204) {
         setResponseMsg(response)
       }
     } catch (error) {

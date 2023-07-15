@@ -3,11 +3,12 @@ import { Typography } from '@mui/material'
 
 export default function LogoutButton() {
   const { logout } = useAuth0()
+  const handleLogout = () => {
+    localStorage.removeItem('userId')
+    logout({ returnTo: window.location.origin })
+  }
   return (
-    <Typography
-      data-testid='logout-button'
-      onClick={() => logout({ returnTo: window.location.origin })}
-    >
+    <Typography data-testid='logout-button' onClick={handleLogout}>
       Logout
     </Typography>
   )

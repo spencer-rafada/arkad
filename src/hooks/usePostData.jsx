@@ -4,15 +4,15 @@ import axios from 'axios'
 export const usePostData = () => {
   const [isLoading, setIsLoading] = useState(false)
   const [error, setError] = useState(null)
-  const [responseMsg, setResponseMsg] = useState(null)
 
   const postData = async (url, data) => {
     setIsLoading(true)
 
     try {
       const response = await axios.post(url, data)
-      if (response) {
-        setResponseMsg(response)
+      if (response.data) {
+        setIsLoading(false)
+        return response.data
       }
     } catch (error) {
       setError(error)
@@ -21,5 +21,5 @@ export const usePostData = () => {
     setIsLoading(false)
   }
 
-  return { postData, isLoading, error, responseMsg }
+  return { postData, isLoading, error }
 }

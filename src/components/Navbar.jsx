@@ -25,7 +25,7 @@ const pages = [
   { page: 'Resources', route: 'resources' },
   // { page: 'Features', route: 'features' },
 ]
-const settings = ['Profile', 'Account', 'Dashboard']
+const settings = [{ page: 'Profile', route: 'profile' }]
 
 function Navbar() {
   const [anchorElNav, setAnchorElNav] = React.useState(null)
@@ -214,7 +214,13 @@ function Navbar() {
                 >
                   {settings.map((setting) => (
                     <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                      <Typography textAlign='center'>{setting}</Typography>
+                      <Typography
+                        textAlign='center'
+                        component={Link}
+                        to={`/${setting.route.toLowerCase()}`}
+                      >
+                        {setting.page}
+                      </Typography>
                     </MenuItem>
                   ))}
                   <MenuItem>

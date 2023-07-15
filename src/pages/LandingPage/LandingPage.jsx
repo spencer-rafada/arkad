@@ -3,10 +3,31 @@ import { css } from '@emotion/react'
 import { useTheme } from '@mui/material/styles'
 import ArkadHomeImage from '../../assets/arkad.jpeg'
 import { useNavigate } from 'react-router-dom'
+import { useAuth0 } from '@auth0/auth0-react'
+import { useEffect } from 'react'
+import { usePostData } from '../../hooks/usePostData'
+import useLocalStorage from '../../hooks/useLocalStorage'
 
 export default function LandingPage() {
   const theme = useTheme()
+  const { isAuthenticated, user } = useAuth0()
+  const { postData } = usePostData()
+  const [userId, setUserId] = useLocalStorage('userId', '')
   const navigate = useNavigate()
+  
+  useEffect(() => {
+    if (!isAuthenticated) return
+    const newUser = {
+      firstName: user.given_name,
+      lastName: user.family_name,
+      tokenData: user,
+    }
+    const fetchUser = async () => {
+      const response = await postData(`http://localhost:3000/user`, newUser)
+      setUserId(response.userId)
+    }
+    fetchUser()
+  }, [isAuthenticated])
 
   // Styles
   const containerStyle = css`
