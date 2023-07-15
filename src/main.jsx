@@ -16,6 +16,7 @@ import Savings from './pages/Resources/components/Savings'
 import Accountability from './pages/Resources/components/Accountability'
 import Separate from './pages/Resources/components/Separate'
 import NotFound from './pages/NotFound'
+import Footer from './components/Footer'
 
 const router = createBrowserRouter([
   {
@@ -24,6 +25,7 @@ const router = createBrowserRouter([
       <>
         <Navbar />
         <LandingPage />
+        <Footer />
       </>
     ),
     errorElement: <ErrorPage />,
@@ -34,6 +36,7 @@ const router = createBrowserRouter([
       <>
         <Navbar />
         <Home />
+        <Footer />
       </>
     ),
     errorElement: <ErrorPage />,
@@ -44,6 +47,7 @@ const router = createBrowserRouter([
       <>
         <Navbar />
         <AuthenticatedGuard component={Profile} />
+        <Footer />
       </>
     ),
     errorElement: <ErrorPage />,
@@ -54,6 +58,7 @@ const router = createBrowserRouter([
       <>
         <Navbar />
         <Resources />
+        <Footer />
       </>
     ),
     children: [
@@ -72,6 +77,7 @@ const router = createBrowserRouter([
       <>
         <Navbar />
         <MyGoals />
+        <Footer />
       </>
     ),
     children: [

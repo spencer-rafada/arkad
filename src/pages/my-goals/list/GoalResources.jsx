@@ -12,7 +12,6 @@ import { useNavigate } from 'react-router-dom'
 export default function GoalResources({ data }) {
   const theme = useTheme()
   const navigate = useNavigate()
-  console.log(data)
 
   return (
     <Stack direction='column' spacing={2} data-testid='goal-resources'>

@@ -12,6 +12,7 @@ import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline'
 import { useState } from 'react'
 import useLocalStorage from '../../../hooks/useLocalStorage'
 import { useNavigate } from 'react-router-dom'
+import { formatDate } from '../../../utils/index'
 
 export default function GoalItem({ item, index, isAuthenticated }) {
   const [complete, setComplete] = useState(item.complete)
@@ -56,7 +57,9 @@ export default function GoalItem({ item, index, isAuthenticated }) {
           <ListItemText
             primary={item.goalTitle}
             secondary={`${item.goalDescription} ${
-              item.goalDueDate ? `- ${item.goalDueDate}` : ``
+              item.goalDueDate
+                ? `- Due Date: ${formatDate(item.goalDueDate)}`
+                : ``
             }`}
             sx={{ width: '100%' }}
           />

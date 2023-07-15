@@ -8,6 +8,7 @@ import {
   ListItemIcon,
   ListItemText,
   ListSubheader,
+  useTheme,
 } from '@mui/material'
 import TrendingUpIcon from '@mui/icons-material/TrendingUp'
 import ExpandLess from '@mui/icons-material/ExpandLess'
@@ -16,6 +17,7 @@ import CircleOutlinedIcon from '@mui/icons-material/CircleOutlined'
 import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline'
 import { usePutData } from '../../../hooks/usePutData'
 import GoalResources from './GoalResources'
+import { formatDate } from '../../../utils/index'
 
 export default function GoalDetail() {
   const params = useParams()
@@ -26,6 +28,8 @@ export default function GoalDetail() {
   )
   const [currentGoal, setCurrentGoal] = useState()
   const { putData } = usePutData()
+  const theme = useTheme()
+
   useEffect(() => {
     setCurrentGoal(data)
   }, [data])
@@ -72,7 +76,10 @@ export default function GoalDetail() {
               {open ? <ExpandLess /> : <ExpandMore />}
             </ListItemButton>
             <Collapse in={open} timeout='auto' unmountOnExit>
-              <List disablePadding>
+              <List
+                disablePadding
+                sx={{ color: `${theme.palette.primary.text}` }}
+              >
                 {data.subGoals.biWeekDates.map((item, index) => {
                   return (
                     <div key={index}>
@@ -86,7 +93,22 @@ export default function GoalDetail() {
                             <CircleOutlinedIcon />
                           )}
                         </ListItemIcon>
-                        <ListItemText primary={item.date}></ListItemText>
+                        <ListItemText
+                          sx={{
+                            textDecoration: item.complete
+                              ? `line-through`
+                              : `null`,
+                          }}
+                          primary={
+                            item.complete
+                              ? `You paid $${
+                                  data.monthlyRevenue * 0.1
+                                } on ${formatDate(item.date)}`
+                              : `You should pay $${
+                                  data.monthlyRevenue * 0.1
+                                } on ${formatDate(item.date)}`
+                          }
+                        ></ListItemText>
                       </ListItemButton>
                     </div>
                   )
