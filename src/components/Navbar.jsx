@@ -43,6 +43,7 @@ function Navbar() {
 
   const navbarLinkStyle = css`
     color: ${theme.palette.primary.text};
+    text-decoration: none;
   `
 
   const handleOpenNavMenu = (event) => {
@@ -169,6 +170,7 @@ function Navbar() {
                   my: 2,
                   color: `${theme.palette.primary.text}`,
                   display: 'block',
+                  textDecoration: 'none',
                 }}
               >
                 {page.page}
@@ -218,6 +220,7 @@ function Navbar() {
                         textAlign='center'
                         component={Link}
                         to={`/${setting.route.toLowerCase()}`}
+                        sx={navbarLinkStyle}
                       >
                         {setting.page}
                       </Typography>
