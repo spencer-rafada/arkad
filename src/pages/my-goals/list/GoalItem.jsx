@@ -15,7 +15,6 @@ import { useNavigate } from 'react-router-dom'
 import { formatDate } from '../../../utils/index'
 
 export default function GoalItem({ item, index, isAuthenticated }) {
-  console.log(item)
   const [complete, setComplete] = useState(item.complete)
   const [goals, setGoals] = useLocalStorage('goal')
   const navigate = useNavigate()

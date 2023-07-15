@@ -25,7 +25,7 @@ export default function Resources() {
     background-color: ${theme.palette.primary.main};
     color: ${theme.palette.primary.primaryBtn};
     width: 100%;
-    height: 1080px;
+    height: 85vh;
   `
 
   return (
