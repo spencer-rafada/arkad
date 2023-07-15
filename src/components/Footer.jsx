@@ -27,7 +27,7 @@ export default function Footer() {
   }
 
   return (
-    <>
+    <div data-testid='footer'>
       <Divider />
       <Container maxWidth='xl' sx={containerStyle}>
         <Box
@@ -65,6 +65,6 @@ export default function Footer() {
           </Box>
         </Box>
       </Container>
-    </>
+    </div>
   )
 }
