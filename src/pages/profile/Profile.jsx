@@ -4,7 +4,7 @@ import useLocalStorage from '../../hooks/useLocalStorage'
 import ProfileDetails from './ProfileDetails'
 import { useTheme } from '@mui/material/styles'
 import { css } from '@emotion/react'
-import { Container, Typography } from '@mui/material'
+import { Box, Typography } from '@mui/material'
 
 export default function Profile() {
   const [userId, setUserId] = useLocalStorage('userId', '')
@@ -19,14 +19,21 @@ export default function Profile() {
     color: ${theme.palette.primary.primaryBtn};
     width: 100%;
     height: 1080px;
+    padding: 1rem;
   `
 
   return (
     <>
-      <Container sx={containerStyle}>
-        <Typography>Profile</Typography>
+      <Box sx={containerStyle} data-testid='profile-container'>
+        <Typography variant='h3' sx={{ fontSize: '2rem' }}>
+          Your Arkad Information
+        </Typography>
         {data && !isLoading && <ProfileDetails data={data} />}
-      </Container>
+        <Typography variant='h3' sx={{ fontSize: '2rem' }}>
+          Your Money Growth
+        </Typography>
+        {data && !isLoading && <Typography>$ {data.savingsMoney}</Typography>}
+      </Box>
     </>
   )
 }
